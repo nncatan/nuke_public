@@ -145,9 +145,18 @@ def bm_NodeSandwich(node_before, node_after):
 	# -------  Lastly, if we create a Log Sandwich, we have to set specific knob values for our nodes  --------
 
 	for x in new_input_nodes:
+		
 		if x.Class() == 'Log2Lin':
 			x.knob('operation').setValue("lin2log")
 			out_node.knob('operation').setValue("log2lin")
+		
+
+		if x.Class() == 'Colorspace':
+			x.knob('colorspace_out').setValue("HSV")
+			out_node.knob('colorspace_in').setValue("HSV")
+			for node in nodes:
+				if node.Class() == 'Grade':
+					node.knob('channels').setValue("rgb.blue")
 		else:
 			return
 
@@ -155,5 +164,6 @@ def bm_NodeSandwich(node_before, node_after):
 
 
 # Lastly, let's add some sandwiches to the appropriate menus!        
-nuke.menu('Nodes').addCommand('Color/Log Sandwich', 'bm_NodeSandwich.bm_NodeSandwich("Log2Lin", "Log2Lin")', "ctrl+shift+l", icon="bm_NodeSandwich.png")
-nuke.menu('Nodes').addCommand('Merge/Premult Sandwich', 'bm_NodeSandwich.bm_NodeSandwich("Unpremult", "Premult")', "ctrl+shift+p", icon="bm_NodeSandwich.png")
+nuke.menu('Nodes').addCommand('Ben McEwan/Sandwiches/Log Sandwich', 'bm_NodeSandwich.bm_NodeSandwich("Log2Lin", "Log2Lin")', "ctrl+shift+l", icon="bm_NodeSandwich.png")
+nuke.menu('Nodes').addCommand('Ben McEwan/Sandwiches/Premult Sandwich', 'bm_NodeSandwich.bm_NodeSandwich("Unpremult", "Premult")', "ctrl+shift+p", icon="bm_NodeSandwich.png")
+nuke.menu('Nodes').addCommand('Ben McEwan/Sandwiches/HSV Sandwich', 'bm_NodeSandwich.bm_NodeSandwich("Colorspace", "Colorspace")', icon="bm_NodeSandwich.png")

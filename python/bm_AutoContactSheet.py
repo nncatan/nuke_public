@@ -104,4 +104,4 @@ def bm_AutoContactSheet():
 
 
 # Add to Comp Toolbox menu
-nuke.menu('Nodes').addCommand("Merge/Auto Contact Sheet", "bm_AutoContactSheet.bm_AutoContactSheet()", icon="ContactSheet.png")
+nuke.menu('Nodes').addCommand("Ben McEwan/Auto Contact Sheet", "bm_AutoContactSheet.bm_AutoContactSheet()", icon="ContactSheet.png")
